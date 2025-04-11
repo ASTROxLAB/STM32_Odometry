@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "stdint.h"
 #include "stdio.h"
 #include "string.h"
 #include "stdbool.h"
@@ -37,6 +38,7 @@
 uint8_t rxBuffer[25];
 char txBuffer[50];
 char resetCmd[8];
+char upDateBuff[8];
 int state = 0;
 
 /* USER CODE END PD */
@@ -144,6 +146,13 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 		HAL_UART_Receive_IT(&huart2, &ch, 1);
 	}
 }
+void updateX(float newX) {
+
+
+	sprintf(upDateBuff, "ACTX%.f", newX);
+
+	HAL_UART_Transmit(&huart2, (uint8_t*) upDateBuff, strlen(upDateBuff), 100);
+}
 /* USER CODE END 0 */
 
 /**
@@ -190,7 +199,8 @@ int main(void) {
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
-		sprintf(txBuffer, "pos_x : %.2f, pos_y ; %.2f , theta ; %.2f\r\n", pos_x, pos_y, zangle);
+		sprintf(txBuffer, "pos_x : %.2f, pos_y ; %.2f , theta ; %.2f\r\n",
+				pos_x, pos_y, zangle);
 		HAL_UART_Transmit(&huart3, (uint8_t*) txBuffer, strlen(txBuffer), 50);
 
 		state = HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13);
@@ -200,7 +210,8 @@ int main(void) {
 			}
 			HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_0);
 			sprintf(resetCmd, "ACT0\r\n");
-			HAL_UART_Transmit_IT(&huart2, (uint8_t*) resetCmd, strlen(resetCmd));
+			HAL_UART_Transmit_IT(&huart2, (uint8_t*) resetCmd,
+					strlen(resetCmd));
 			HAL_Delay(500);
 		}
 	}
