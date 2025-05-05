@@ -1,0 +1,10 @@
+../Core/Src/main.c:99:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/main.c:149:6:updateX	16	static
+../Core/Src/main.c:162:5:main	40	static
+../Core/Src/main.c:225:6:SystemClock_Config	88	static
+../Core/Src/main.c:268:13:MX_ETH_Init	8	static
+../Core/Src/main.c:316:13:MX_USART2_UART_Init	8	static
+../Core/Src/main.c:347:13:MX_USART3_UART_Init	8	static
+../Core/Src/main.c:378:13:MX_USB_OTG_FS_PCD_Init	8	static
+../Core/Src/main.c:411:13:MX_GPIO_Init	56	static
+../Core/Src/main.c:471:6:Error_Handler	4	static,ignoring_inline_asm
