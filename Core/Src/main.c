@@ -35,7 +35,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-uint8_t rxBuffer[25];
+
 char txBuffer[50];
 char resetCmd[8];
 char upDateBuff[8];
